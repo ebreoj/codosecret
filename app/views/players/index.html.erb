@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<body>
+
+<% content_for(:title, "Players") %>
+
+
+	<h1> Listing <%= pluralize(@players.length, "players") %></h1>
+
+	<table>
+		<thead>
+			<tr>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Action</td>
+				<td></td>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @players.each do |player| %>
+			<tr>
+				<td><%= player.first_name %></td>
+				<td><%= player.last_name %></td>
+				<td>
+					<!-- <a href="/players/<%= player.id %>">Show Profile</a> | -->
+					<%= link_to "Show Profile", player_path(player.id) %> |
+					<!-- <a href="/players/<%= player.id %>/edit">Edit Profile</a> | -->
+					<!-- <a href="/players/<%= player.id %>">Show Profile</a> | -->
+					<%= link_to "Edit Profile", player_edit_path(player.id) %> |
+					<%= link_to "Delete Profile", player_path(player.id), data: { method: :delete, confirm: "Are you sure?"} %>
+<!-- 
+					<a href="/players/<%= player.id %>" data-method="delete" data-confirm="Are you sure?">Delete Profile</a></td> -->
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<!-- <a href="/players/new">New Player</a> -->
+	<%= link_to "New Player", players_new_path %>
+
+
+
+
+
+
+
+</body>
+</html>
